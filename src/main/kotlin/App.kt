@@ -26,12 +26,13 @@ class App(private val scanner: Scanner = Scanner(System.`in`)) {
     }
 
     private fun getMenuItems(): List<String> {
-        var listOfArch: MutableList<String> = mutableListOf()
+        val listOfArch: MutableList<String> = mutableListOf()
+        listOfArch.add("Создать архив")
         if (archives.isNotEmpty())
-            listOfArch =  archives.map{it.toString()}.toMutableList()
+            listOfArch +=  archives.map{it.toString()}.toMutableList()
 
-        listOfArch.addFirst("Создать архив")
-        listOfArch.addLast("Выход")
+
+        listOfArch.add("Выход")
         return listOfArch
     }
     private fun printMenu(header: String, items:List<String>) {
@@ -52,7 +53,7 @@ class App(private val scanner: Scanner = Scanner(System.`in`)) {
 
     private fun manageArchive(archive: Archive) {
         while (true) {
-            printMenu("Управление архивом ${archive.name}:",
+            printMenu("Управление архивом \u001B[32m${archive.name}\u001B[0m:",
                 listOf("Добавить заметку", "Просмотреть заметки", "Назад"))
 
             when (readInt()) {
@@ -69,17 +70,17 @@ class App(private val scanner: Scanner = Scanner(System.`in`)) {
 
     private fun manageNotes(archive: Archive) {
         if (archive.notes.isEmpty()) {
-            println("В архиве ${archive.name} нет заметок.")
+            println("В архиве \u001B[32m${archive.name}\u001B[0m нет заметок.")
         } else {
             while (true) {
                 val list: MutableList<String> = mutableListOf()
                 for (note in archive.notes)
                     list.add(note.title)
                 list.add("Назад")
-                printMenu("Список заметок в архиве ${archive.name}:",list)
+                printMenu("Список заметок в архиве \u001B[32m${archive.name}\u001B[0m:",list)
                 when (val count = readInt()) {
                     list.size-1 -> {
-                        manageArchive(archive)
+                        //manageArchive(archive)
                         return
                     }
                     else -> archive.viewNote(count)

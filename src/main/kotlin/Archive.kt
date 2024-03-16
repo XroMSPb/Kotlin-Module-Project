@@ -19,16 +19,16 @@ data class Archive(
             return
         }
         notes.add(Note(title, content))
-        println("Заметка добавлена в архив $name.")
+        println("Заметка добавлена в архив \u001B[32m$name\u001B[0m.")
     }
 
     fun viewNote(index: Int) {
         if (notes.isEmpty())
             println("В архиве $name нет заметок.")
         else{
-            println("Содержимое заметки ${notes[index].title}:")
-            println("\u001B[32m ${notes[index].content}\u001B[0m")
-            }
+            println("Содержимое заметки \u001B[32m${notes[index].title}\u001B[0m:")
+            println("\u001B[32m${notes[index].content}\u001B[0m\n")
+        }
     }
 
 }
